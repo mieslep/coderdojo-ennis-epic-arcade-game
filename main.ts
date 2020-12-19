@@ -3,20 +3,48 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         johnsDungeon()
     } else if (mySprite.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleRedCrystal)) {
         mainMap()
+    } else if (mySprite.tileKindAt(TileDirection.Center, myTiles.tile1)) {
+        philsGame()
     }
 })
 function mainMap () {
+    isMainMap = 1
     tiles.setTilemap(tilemap`level`)
     scene.cameraFollowSprite(mySprite)
     tiles.placeOnTile(mySprite, mainMapLocation)
 }
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
-    mainMapLocation = location
+scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass1, function (sprite, location) {
+    if (isMainMap == 1) {
+        mainMapLocation = location
+    }
 })
+function philsGame () {
+    isMainMap = 0
+    tiles.setTilemap(tiles.createTilemap(hex`1000100001010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010102010101010101010101010101010101010101`, img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, [myTiles.transparency16,sprites.castle.tileDarkGrass3,sprites.dungeon.collectibleRedCrystal], TileScale.Sixteen))
+}
 function johnsDungeon () {
+    isMainMap = 0
     tiles.setTilemap(tilemap`johnsDungeon`)
 }
 let mainMapLocation: tiles.Location = null
+let isMainMap = 0
 let mySprite: Sprite = null
 mySprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
@@ -38,4 +66,4 @@ mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite, 100, 100)
 mainMap()
-tiles.placeOnRandomTile(mySprite, sprites.castle.tileGrass1)
+tiles.placeOnRandomTile(mySprite, sprites.castle.shrub)
