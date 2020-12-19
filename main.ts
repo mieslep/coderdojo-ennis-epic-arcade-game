@@ -1,5 +1,24 @@
-tiles.setTilemap(tilemap`level`)
-let mySprite = sprites.create(img`
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (mySprite.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleInsignia)) {
+        johnsDungeon()
+    } else if (mySprite.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleRedCrystal)) {
+        mainMap()
+    }
+})
+function mainMap () {
+    tiles.setTilemap(tilemap`level`)
+    scene.cameraFollowSprite(mySprite)
+    tiles.placeOnTile(mySprite, mainMapLocation)
+}
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
+    mainMapLocation = location
+})
+function johnsDungeon () {
+    tiles.setTilemap(tilemap`johnsDungeon`)
+}
+let mainMapLocation: tiles.Location = null
+let mySprite: Sprite = null
+mySprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . b 5 b . . . 
     . . . . . . . . . b 5 b . . . . 
@@ -18,5 +37,5 @@ let mySprite = sprites.create(img`
     . . . c c c c c c c c b b . . . 
     `, SpriteKind.Player)
 controller.moveSprite(mySprite, 100, 100)
-tiles.placeOnRandomTile(mySprite, sprites.castle.tileGrass3)
-scene.cameraFollowSprite(mySprite)
+mainMap()
+tiles.placeOnRandomTile(mySprite, sprites.castle.tileGrass1)
