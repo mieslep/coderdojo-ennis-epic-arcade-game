@@ -32,7 +32,6 @@ function mainMap () {
         tiles.placeOnRandomTile(mySprite, sprites.castle.shrub)
     }
     controller.moveSprite(mySprite, 100, 100)
-    loadMainMap = false
 }
 // Cannot yet find a way to keep track of where you left the main map as the "location" variable is not available in the "button" block.
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass1, function (sprite, location) {
@@ -77,7 +76,6 @@ function johnsDungeon () {
     currentMap = "johnsDungeon"
     tiles.setTilemap(tilemap`johnsDungeon`)
 }
-let loadMainMap = false
 let mainMapLocation: tiles.Location = null
 let currentMap = ""
 let mySprite: Sprite = null
