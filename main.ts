@@ -11,7 +11,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (currentMap == "mainMap") {
         if (mySprite.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleInsignia)) {
             johnsDungeon()
-        } else if (mySprite.tileKindAt(TileDirection.Center, myTiles.tile1)) {
+        } else if (mySprite.tileKindAt(TileDirection.Center, assets.tile`tile1`)) {
             philsGame()
         }
     } else if (currentMap == "johnsDungeon") {
@@ -42,15 +42,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass1, function (spri
 function philsGame () {
     currentMap = "philsGame"
     controller.moveSprite(mySprite, 100, 100)
-    tiles.setTilemap(tiles.createTilemap(hex`21000700010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101`, img`
-        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-        `, [myTiles.transparency16,sprites.castle.tileDarkGrass3], TileScale.Sixteen))
+    tiles.setTilemap(tilemap`level1`)
     scene.cameraFollowSprite(mySprite)
     tiles.placeOnTile(mySprite, tiles.getTileLocation(16, 3))
     mySprite.setImage(img`
